@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Carros{% endblock %}
+
+{% block content %}
+  <h1>Lista de Carros</h1>
+  <form method="GET" class="mb-4">
+      {{ form.search.label }} {{ form.search }} <button type="submit" class="btn btn-primary">Buscar</button>
+  </form>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Modelo</th>
+              <th>Marca</th>
+              <th>Ano de Fabricação</th>
+              <th>Ano do Modelo</th>
+              <th>Placa</th>
+              <th>Preço</th>
+              <th>Ações</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for car in cars %}
+          <tr>
+              <td>{{ car.model }}</td>
+              <td>{{ car.brand.name }}</td>
+              <td>{{ car.factory_year }}</td>
+              <td>{{ car.model_year }}</td>
+              <td>{{ car.plate }}</td>
+              <td>R$ {{ car.price }}</td>
+              <td>
+                  <a href="{% url 'edit_car' car.id %}" class="btn btn-warning">Editar</a>
+                  <a href="{% url 'delete_car' car.id %}" class="btn btn-danger">Excluir</a>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  <a href="{% url 'new_car' %}" class="btn btn-success">Cadastrar Novo Carro</a>
+{% endblock %}

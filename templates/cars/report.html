@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Relatório de Carros{% endblock %}
+
+{% block content %}
+<h1>Relatório de Carros</h1>
+<form method="get">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+</form>
+
+<h2>Resultados</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Modelo</th>
+            <th>Marca</th>
+            <th>Ano de Fabricação</th>
+            <th>Ano do Modelo</th>
+            <th>Placa</th>
+            <th>Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for car in cars %}
+        <tr>
+            <td>{{ car.id }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.brand.name }}</td>
+            <td>{{ car.factory_year }}</td>
+            <td>{{ car.model_year }}</td>
+            <td>{{ car.plate }}</td>
+            <td>{{ car.price }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">Nenhum carro encontrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

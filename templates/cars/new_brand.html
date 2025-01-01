@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar Nova Marca{% endblock %}
+
+{% block content %}
+<h1>Cadastrar Nova Marca</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+{% endblock %}
